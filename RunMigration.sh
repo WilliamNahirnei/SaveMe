@@ -1,0 +1,1 @@
+docker exec -it saveme-backend npx sequelize-cli db:migrate

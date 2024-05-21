@@ -1,0 +1,39 @@
+version: '3'
+
+services: 
+  saveme-api:
+    container_name: 'saveme-backend'
+    build:
+      context: .
+      dockerfile: Dockerfile-backend
+    command: sh -c "npm i && npm start"
+    ports: 
+      - '3000:3000'
+    volumes: 
+      - ./Backend/:/usr/app
+    depends_on:
+      - "saveme-db"
+
+  saveme-front:
+    container_name: 'saveme-frontend'
+    build:
+      context: .
+      dockerfile: saveme-frontend
+    command: sh -c "npm i && npm start"
+    ports: 
+      - '3005:3005'
+    volumes: 
+      - ./Frontend/:/usr/app
+
+  saveme-db:
+    container_name: 'saveme-db'
+    image: mysql:5.7
+    restart: always
+    volumes:
+      - ./MySQL:/var/lib/mysql
+      - ./my.cnf:/etc/mysql/my.cnf
+    ports: 
+      - '3308:3306'
+    environment: 
+      MYSQL_ROOT_PASSWORD: "root"
+      MYSQL_DATABASE: "saveme"
