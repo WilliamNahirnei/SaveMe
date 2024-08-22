@@ -45,7 +45,7 @@ const HelpPoint = database.define('HelpPoint', {
             unique: false
         },
     },
-    {tableName: 'HelpPoint'}
+    {tableName: 'HelpPoint',   timestamps: false,}
 )
 
 module.exports = HelpPoint

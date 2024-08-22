@@ -27,16 +27,16 @@ exports.show = async function (request, response) {
 }
 
 exports.store = async function (request, response) {
-    try{
+    // try{
         // await Validations.validateRequest(request, UserRequest.validateToStore())
         const user = await UserService.store(request)
         response.status(201).send(user)
-    } catch (error) {
-        if (error?.codeForRequest)
-            response.status(error.codeForRequest).send({error:error.type, messages:error.errorListMessage})
-        else
-            response.status(500).send({messages:['internal server error']})
-    }
+    // } catch (error) {
+    //     if (error?.codeForRequest)
+    //         response.status(error.codeForRequest).send({error:error.type, messages:error.errorListMessage})
+    //     else
+    //         response.status(500).send({messages:['internal server error']})
+    // }
 }
 
 exports.update = async function (request, response) {

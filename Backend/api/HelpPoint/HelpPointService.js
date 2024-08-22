@@ -11,8 +11,25 @@ const HelpPointRequest = require('./HelpPointRequest')
 
 exports.index = async function (request) {
     const requestParams = RequestUtils.getRequestParams(request)
-
-    return Formater.index(await HelpPointRepository.index())
+    const filters = {
+        numberPeople: {
+            comparison: '>',
+            value: 10
+        },
+        numberAnimals: {
+            comparison: '<=',
+            value: 5
+        },
+        dateHour: {
+            comparison: 'between',
+            value: ['2024-01-01T00:00:00Z', '2024-12-31T23:59:59Z']
+        },
+        idStatus: {
+            comparison: '=',
+            value: 3
+        }
+    };
+    return Formater.index(await HelpPointRepository.index(filters))
 }
 
 exports.show = async function (request, response) {
@@ -26,7 +43,7 @@ exports.show = async function (request, response) {
 
 exports.store = async function (request) {
     const requestParams = RequestUtils.getRequestParams(request)
-    await Validations.validateObject(requestParams, HelpPointRequest.validateToStore())
+    // await Validations.validateObject(requestParams, HelpPointRequest.validateToStore())
 
 
     const helpPoint = await sequelize.transaction(async (transaction) => {

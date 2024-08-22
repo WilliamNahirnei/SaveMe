@@ -3,8 +3,8 @@ exports.validateToStore = function () {
         {name: 'latitude', validations:'required|string|max:300'},
         {name: 'longitude', validations:'required|string|max:300'},
         {name: 'details', validations:'string|min:0|max:5000'},
-        {name: 'numberPeople', validations:'int|min:0|max:1000'},
-        {name: 'numberAnimals', validations:'int|min:0|max:1000'},
+        {name: 'numberPeople', validations:'number|min:0|max:1000'},
+        {name: 'numberAnimals', validations:'number|min:0|max:1000'},
 
 
     ]
@@ -12,7 +12,7 @@ exports.validateToStore = function () {
 
 exports.validateToUpdate = function () {
     return [
-        {name: 'idStatus', validations:'required|int'},
+        {name: 'idStatus', validations:'required|number'},
     ]
 }
 

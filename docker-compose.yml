@@ -14,16 +14,16 @@ services:
     depends_on:
       - "saveme-db"
 
-  saveme-front:
-    container_name: 'saveme-frontend'
-    build:
-      context: .
-      dockerfile: saveme-frontend
-    command: sh -c "npm i && npm start"
-    ports: 
-      - '3005:3005'
-    volumes: 
-      - ./Frontend/:/usr/app
+  # saveme-front:
+  #   container_name: 'saveme-frontend'
+  #   build:
+  #     context: .
+  #     dockerfile: saveme-frontend
+  #   command: sh -c "npm i && npm start"
+  #   ports: 
+  #     - '3005:3005'
+  #   volumes: 
+  #     - ./Frontend/:/usr/app
 
   saveme-db:
     container_name: 'saveme-db'

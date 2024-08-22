@@ -1,15 +1,15 @@
 const HelpPointService = require('./HelpPointService')
 
 exports.index = async function (request, response) {
-    // try {
+    try {
         const helpPointList = await HelpPointService.index(request)
         response.send(helpPointList)
-    // } catch (error) {
-    //     if (error?.codeForRequest)
-    //         response.status(error.codeForRequest).send({error:error.type, messages:error.errorListMessage})
-    //     else
-    //         response.status(500).send({messages:['internal server error']})
-    // }
+    } catch (error) {
+        if (error?.codeForRequest)
+            response.status(error.codeForRequest).send({error:error.type, messages:error.errorListMessage})
+        else
+            response.status(500).send({messages:['internal server error']})
+    }
 }
 
 exports.show = async function (request, response) {
