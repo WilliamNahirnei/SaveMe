@@ -4,6 +4,8 @@ const COMPARISON_LESS_THAN = '<';
 const COMPARISON_GREATER_OR_EQUAL = '>=';
 const COMPARISON_LESS_OR_EQUAL = '<=';
 const COMPARISON_BETWEEN = 'between';
+const COMPARISON_DISTANCE = 'distance'
+
 
 module.exports = {
     COMPARISON_EQUAL,
@@ -12,4 +14,5 @@ module.exports = {
     COMPARISON_GREATER_OR_EQUAL,
     COMPARISON_LESS_OR_EQUAL,
     COMPARISON_BETWEEN,
+    COMPARISON_DISTANCE,
 };

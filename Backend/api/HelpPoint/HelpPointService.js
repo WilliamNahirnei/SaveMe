@@ -11,24 +11,7 @@ const HelpPointRequest = require('./HelpPointRequest')
 
 exports.index = async function (request) {
     const requestParams = RequestUtils.getRequestParams(request)
-    const filters = {
-        numberPeople: {
-            comparison: '>',
-            value: 10
-        },
-        numberAnimals: {
-            comparison: '<=',
-            value: 5
-        },
-        dateHour: {
-            comparison: 'between',
-            value: ['2024-01-01T00:00:00Z', '2024-12-31T23:59:59Z']
-        },
-        idStatus: {
-            comparison: '=',
-            value: 3
-        }
-    };
+    const filters = RequestUtils.extractQueryFilters(request)
     return Formater.index(await HelpPointRepository.index(filters))
 }
 
