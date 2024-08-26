@@ -14,18 +14,15 @@ const quantityDaysValidToken = process.env.DAYS_TO_EXPIRE_TOKEN
 
 exports.signIn = async function (request, response) {
     const requestParams = request.body
-    const user = await UserRepository.getByEmail(requestParams.userEmail)
-
+    const user = await UserRepository.getByEmailWithPassword(requestParams.userEmail)
     if (!(user instanceof User)) {
         throw new AcceptableExeption(true,'UNAUTHORIZED', errorListMessage = ['email or password do not match'], codeForRequest = 401)
     }
 
     const equalsPasswords = bcrypt.compareSync(requestParams.password, user.userPassword)
-
     if(!equalsPasswords) {
         throw new AcceptableExeption(true,'UNAUTHORIZED', errorListMessage = ['email or password do not match'], codeForRequest = 401)
     }
-
     const now = Math.floor(Date.now() / 1000)
 
     const authInfo = {

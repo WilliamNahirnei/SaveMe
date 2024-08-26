@@ -36,6 +36,17 @@ const User = database.define('User', {
         allowNull: false,
         defaultValue: 'active'
     }
-},{tableName: 'User',})
+},
+{
+    tableName: 'User',
+    defaultScope: {
+        attributes: { exclude: ['userPassword'] },
+    },
+    scopes: {
+        withPassword: {
+            attributes: {},
+        }
+    },
+})
 
 module.exports = User

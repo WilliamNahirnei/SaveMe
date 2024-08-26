@@ -30,8 +30,6 @@ exports.store = async function (request) {
         const preparedData = Preparer.prepareToStore(requestParams)
         const user = await UserRepository.store(preparedData, {transaction})
 
-        console.log("HERE2")
-
         return user
     })
     return user

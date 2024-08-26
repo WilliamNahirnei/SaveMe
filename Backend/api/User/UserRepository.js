@@ -8,8 +8,8 @@ exports.show = async function (idUser) {
     return await User.findByPk(idUser)
 }
 
-exports.getByEmail = async function (userEmail) {
-    return await User.findOne({ where: { userEmail: userEmail } })
+exports.getByEmailWithPassword = async function (userEmail) {
+    return await User.scope('withPassword').findOne({ where: { userEmail: userEmail } })
 }
 
 exports.store = async function (UserData, options = null) {

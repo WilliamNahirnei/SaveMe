@@ -33,8 +33,5 @@ exports.prepareToActiveUser = function () {
 
 function encryptPassword(password) {
     const salt = bcrypt.genSaltSync(10)
-
-    console.log(password)
-    // const salt = bcrypt.genSaltSync(10)
     return bcrypt.hashSync(password, salt)
 }

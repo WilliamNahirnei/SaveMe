@@ -34,7 +34,7 @@ module.exports = app => {
         .post((request, response) => {
             UserController.store(request, response)
         })
-        // .all(AuthService.autenticateRequest().authenticate())
+        .all(AuthService.autenticateRequest().authenticate())
         .get((request, response) => {
             UserController.index(request, response)
         })
@@ -67,13 +67,13 @@ module.exports = app => {
         (request, response) => {
         HelpPointController.store(request, response)
     })
-        // .all(AuthService.autenticateRequest().authenticate())
+        .all(AuthService.autenticateRequest().authenticate())
         .get((request, response) => {
             HelpPointController.index(request, response)
         })
 
     app.route('/helpPoint/:idHelpPoint')
-        // .all(AuthService.autenticateRequest().authenticate())
+        .all(AuthService.autenticateRequest().authenticate())
         .get((request, response) => {
             HelpPointController.show(request, response)
         })
