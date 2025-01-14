@@ -48,6 +48,7 @@ export default function UserList() {
                             <TableCell>Identificador</TableCell>
                             <TableCell>Nome Completo</TableCell>
                             <TableCell>Email</TableCell>
+                            <TableCell>Status</TableCell>
                             <TableCell align="center">Ações</TableCell>
                         </TableRow>
                     </TableHead>

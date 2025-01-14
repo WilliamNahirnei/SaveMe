@@ -5,6 +5,7 @@ import { CheckCircle, Cancel } from "@mui/icons-material";
 import React from "react";
 import { useSnackbar } from "notistack";
 
+import StatusChip from '../BasicComponents/StatusChip';
 import { activeUser, deactiveUser } from '../../api/user-api';
 
 export default function UserStatus(props) {
@@ -42,12 +43,7 @@ export default function UserStatus(props) {
     return (
         <Grid container spacing={2} alignItems="center">
             <Grid item xs={6}>
-                <Chip
-                    label={isActiveUser() ? "Ativo" : "Inativo"}
-                    color={isActiveUser() ? "success" : "error"}
-                    icon={isActiveUser() ? <CheckCircle /> : <Cancel />}
-                    sx={{ fontSize: '16px', fontWeight: 'bold' }}
-                />
+                <StatusChip status={userStatus}/>
             </Grid>
             <Grid item xs={6}>
                 <Button

@@ -1,11 +1,12 @@
 import React from "react";
-import Link from 'next/link';
+import Link from "next/link";
 import { AiFillEdit, AiFillEye } from "react-icons/ai";
-import DeleteUser from './DeleteUser';
-import IconButton from '@mui/material/IconButton';
-import Tooltip from '@mui/material/Tooltip';
-import TableRow from '@mui/material/TableRow';
-import TableCell from '@mui/material/TableCell';
+import DeleteUser from "./DeleteUser";
+import IconButton from "@mui/material/IconButton";
+import Tooltip from "@mui/material/Tooltip";
+import TableRow from "@mui/material/TableRow";
+import TableCell from "@mui/material/TableCell";
+import StatusChip from "../BasicComponents/StatusChip";
 
 export default function UserLine({ user, searchUsers }) {
     return (
@@ -16,7 +17,10 @@ export default function UserLine({ user, searchUsers }) {
             <TableCell>{user.userFullName}</TableCell>
             <TableCell>{user.userEmail}</TableCell>
             <TableCell>
-                <div style={{ display: 'flex', justifyContent: 'space-around' }}>
+                <StatusChip status={user.userStatus} />
+            </TableCell>
+            <TableCell>
+                <div style={{ display: "flex", justifyContent: "space-around" }}>
                     <Tooltip title="Visualizar detalhes do usuário" arrow>
                         <IconButton
                             color="success"
