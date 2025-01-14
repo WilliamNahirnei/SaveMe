@@ -54,7 +54,7 @@ export default function RootLayout({ children }) {
             </Toolbar>
           </AppBar>
 
-          <Container sx={{ mt: 2 }}>
+          <Container sx={{ mt: 2, width: "90%", marginLeft: 0}} maxWidth={false}>
             {children}
           </Container>
         </Box>

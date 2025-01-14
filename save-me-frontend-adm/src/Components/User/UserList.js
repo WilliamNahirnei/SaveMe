@@ -30,9 +30,6 @@ export default function UserList() {
 
     return (
         <div>
-            <Typography variant="h4" gutterBottom>
-                Lista de Usuários
-            </Typography>
 
             <Button
                 variant="contained"
