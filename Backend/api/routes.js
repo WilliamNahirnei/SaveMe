@@ -34,13 +34,13 @@ module.exports = app => {
         .post((request, response) => {
             UserController.store(request, response)
         })
-        .all(AuthService.autenticateRequest().authenticate())
+        // .all(AuthService.autenticateRequest().authenticate())
         .get((request, response) => {
             UserController.index(request, response)
         })
 
     app.route('/User/:idUser')
-        .all(AuthService.autenticateRequest().authenticate())
+        // .all(AuthService.autenticateRequest().authenticate())
         .get((request, response) => {
             UserController.show(request, response)
         })
@@ -50,13 +50,13 @@ module.exports = app => {
         })
 
     app.route('/user/:idUser/deactive')
-        .all(AuthService.autenticateRequest().authenticate())
+        // .all(AuthService.autenticateRequest().authenticate())
         .delete((request, response) => {
             UserController.deactive(request, response)
         })
 
     app.route('/user/:idUser/active')
-        .all(AuthService.autenticateRequest().authenticate())
+        // .all(AuthService.autenticateRequest().authenticate())
         .put((request, response) => {
             UserController.active(request, response)
         })

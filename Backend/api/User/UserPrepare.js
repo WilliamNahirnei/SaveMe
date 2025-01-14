@@ -15,7 +15,7 @@ exports.prepareToUpdate = function (User, data) {
         userFullName: data.fullName ? data.fullName : User.userFullName,
         userBirthDate: data.birthDate ? data.birthDate : User.userBirthDate,
         userEmail: data.email ? data.email : User.userEmail,
-        userEmail: data.password ? data.password : User.userPassword,
+        userPassword: data.password ? data.password : User.userPassword,
     }
 }
 
