@@ -1,8 +1,17 @@
 const User = require('./User')
+const { applyFilters } = require('../DatabaseSuport/WhereSuport');
+const FILTER_FIELDS = require('./UserFilters');
 
-exports.index = async function () {
-    return await User.findAll()
-}
+exports.index = async function (filters) {
+    const whereClause = applyFilters(filters, FILTER_FIELDS);
+    if (Object.keys(whereClause).length === 0) {
+        return await User.findAll();
+    }
+
+    return await User.findAll({
+        where: whereClause
+    });
+};
 
 exports.show = async function (idUser) {
     return await User.findByPk(idUser)

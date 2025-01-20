@@ -7,7 +7,8 @@ const AcceptableExeption = require('../CustomException/AcceptableException')
 
 exports.index = async function (request) {
     const requestParams = RequestUtils.getRequestParams(request)
-    return Formater.index(await UserRepository.index(), 'userList')
+    const filters = RequestUtils.extractQueryFilters(request)
+    return Formater.index(await UserRepository.index(filters), 'userList')
 }
 
 exports.show = async function (request, response) {

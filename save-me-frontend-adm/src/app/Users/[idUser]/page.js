@@ -1,15 +1,19 @@
 "use client";
 
-import React, { useEffect, useState } from 'react';
-import { Box, Card, Grid, Typography, Divider, Avatar, Chip, CircularProgress } from "@mui/material";
+import React, { useEffect, useState } from "react";
+import { Box, Card, Grid, Typography, Divider, Avatar, CircularProgress, Button } from "@mui/material";
 import { useSnackbar } from "notistack";
-import { deepPurple } from '@mui/material/colors';
+import { deepPurple } from "@mui/material/colors";
+import { useRouter } from "next/navigation";
+import { AiFillEdit } from "react-icons/ai";
+
 
 import UserStatus from "../../../Components/User/UserStatus";
-import { getUser } from '../../../api/user-api';
+import { getUser } from "../../../api/user-api";
 
 export default function UserDetails({ params }) {
     const idUser = params.idUser;
+    const router = useRouter();
 
     const { enqueueSnackbar } = useSnackbar();
     const [userData, setUserData] = useState({
@@ -42,10 +46,10 @@ export default function UserDetails({ params }) {
         }
     }
 
-    const negativeNotify = (errorMessage = '') => {
+    const negativeNotify = (errorMessage = "") => {
         enqueueSnackbar(`Erro ao buscar usuário. ${errorMessage}`, {
             variant: "error",
-            autoHideDuration: 5000
+            autoHideDuration: 5000,
         });
     };
 
@@ -67,7 +71,7 @@ export default function UserDetails({ params }) {
                         </Avatar>
                     </Grid>
                     <Grid item xs={12}>
-                        <Typography variant="h5" align="center" sx={{ fontWeight: 'bold' }}>
+                        <Typography variant="h5" align="center" sx={{ fontWeight: "bold" }}>
                             {userData.userFullName}
                         </Typography>
                         <Typography variant="body2" color="textSecondary" align="center">
@@ -83,8 +87,21 @@ export default function UserDetails({ params }) {
                         <Typography variant="subtitle1">Data de Nascimento:</Typography>
                         <Typography variant="body1">{userData.userBirthDate}</Typography>
                     </Grid>
-                    <Grid item xs={12} sx={{ mt: 2 }}>
-                        <UserStatus idUser={idUser} status={userData.userStatus} reloadParent={loadUserData} />
+                    <Grid item xs={12} sx={{ mt: 2, display: "flex", gap: 2 }}>
+                        <Grid item xs={8} sx={{ mt: 2, display: "flex", gap: 2 }}>
+                            <UserStatus idUser={idUser} status={userData.userStatus} reloadParent={loadUserData} />
+                        </Grid>
+                        <Grid item xs={4} sx={{ mt: 2, display: "flex", gap: 2 }}>
+                            <Button
+                                variant="contained"
+                                color="primary"
+                                onClick={() => router.push(`/Users/update/${idUser}`)}
+                                startIcon={<AiFillEdit />}
+                                fullWidth
+                            >
+                                Editar
+                            </Button>
+                        </Grid>
                     </Grid>
                 </Grid>
             </Card>

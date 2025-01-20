@@ -1,0 +1,23 @@
+const COMPARISONS = require('../DatabaseSuport/EnumComparison');
+
+const FILTER_FIELDS = {
+    userFullName: [
+        COMPARISONS.COMPARISON_EQUAL
+    ],
+    userBirthDate: [
+        COMPARISONS.COMPARISON_EQUAL, 
+        COMPARISONS.COMPARISON_GREATER_THAN, 
+        COMPARISONS.COMPARISON_LESS_THAN, 
+        COMPARISONS.COMPARISON_GREATER_OR_EQUAL, 
+        COMPARISONS.COMPARISON_LESS_OR_EQUAL, 
+        COMPARISONS.COMPARISON_BETWEEN
+    ],
+    userEmail: [
+        COMPARISONS.COMPARISON_EQUAL
+    ],
+    userStatus: [
+        COMPARISONS.COMPARISON_EQUAL
+    ]
+};
+
+module.exports = FILTER_FIELDS;
