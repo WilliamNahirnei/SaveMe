@@ -1,16 +1,25 @@
 const User = require('./User')
-const { applyFilters } = require('../DatabaseSuport/WhereSuport');
+const { mountObjectDefaultToSelect } = require('../DatabaseSuport/WhereSuport');
 const FILTER_FIELDS = require('./UserFilters');
 
-exports.index = async function (filters) {
-    const whereClause = applyFilters(filters, FILTER_FIELDS);
-    if (Object.keys(whereClause).length === 0) {
-        return await User.findAll();
-    }
+exports.index = async function (filters, paginationData) {
+    objectToSelect = mountObjectDefaultToSelect(
+        {
+            filters,
+            filterFields: FILTER_FIELDS
+        }, 
+        paginationData
+    )
 
-    return await User.findAll({
-        where: whereClause
-    });
+    const users = await User.findAndCountAll(objectToSelect);
+    const totalPages = Math.ceil(users.count / paginationData.pageSize);
+
+    return {
+        total: users.count,
+        page: paginationData.page,
+        totalPages,
+        users: users.rows
+    };
 };
 
 exports.show = async function (idUser) {

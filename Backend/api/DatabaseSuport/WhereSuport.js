@@ -1,4 +1,5 @@
 const COMPARISON_FUNCTIONS = require('./ComparisonDatabase');
+const {isNumber} = require("../Validation/BasicChecks");
 
 function applyFilters(filters, filterFields) {
     const whereClause = {};
@@ -23,4 +24,25 @@ function applyFilters(filters, filterFields) {
     return whereClause;
 }
 
-module.exports = { applyFilters };
+function mountObjectDefaultToSelect(filtersData = {}, paginationData = {}) {
+    let selectParameters = {}
+    const whereClause = applyFilters(filtersData.filters, filtersData.filterFields);
+    if(whereClause) {
+        selectParameters.where = whereClause
+    }
+    if(isNumber(paginationData.offset)) {
+        selectParameters.offset = paginationData.offset
+    }
+    if(isNumber(paginationData.pageSize)) {
+        selectParameters.limit = paginationData.pageSize
+    }
+    // if(order) {
+    //     selectParameters.order = [['createdAt', 'DESC']]
+    // } else {
+    //     selectParameters.order = [['createdAt', 'DESC']]
+    // }
+
+    return selectParameters
+}
+
+module.exports = { applyFilters, mountObjectDefaultToSelect };

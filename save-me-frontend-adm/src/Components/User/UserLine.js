@@ -42,7 +42,7 @@ export default function UserLine({ user, searchUsers }) {
                     </Tooltip>
 
                     <Tooltip title="Deletar usuário permanentemente" arrow>
-                        <DeleteUser idUser={user.idUser} searchUsers={searchUsers} />
+                        {/* <DeleteUser idUser={user.idUser} searchUsers={searchUsers} /> */}
                     </Tooltip>
                 </div>
             </TableCell>

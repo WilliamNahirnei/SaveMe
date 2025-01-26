@@ -1,3 +1,4 @@
+const {query} = require("express");
 exports.getRequestParams = function(request) {
     return {
         ...request.params,
@@ -38,6 +39,20 @@ function extractFilters(inputObject) {
     }
 
     return filters;
+}
+
+exports.getPaginationParams = function(request) {
+    const paginationData = mountPaginationParamsObject(request.query)
+    return paginationData
+}
+
+function mountPaginationParamsObject(requestData) {
+    const pageSize = requestData.pageSize ? parseInt(requestData.pageSize): 10
+    return {
+        offset: (requestData.page - 1) * pageSize,
+        page: requestData.page,
+        pageSize: pageSize,
+    }
 }
 
 // Função para analisar o objeto JSON do filtro

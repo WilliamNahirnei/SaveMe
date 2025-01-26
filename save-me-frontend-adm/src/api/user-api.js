@@ -2,9 +2,9 @@ import { get, post, destroy, put } from './generic-api';
 
 const basicUserUrl = '/user';
 
-export const getUsers = async (notificationComponent) => {
+export const getUsers = async (params, filters, notificationComponent) => {
     try {
-        const { data } = await get(basicUserUrl, {}, notificationComponent);
+        const { data } = await get(basicUserUrl, params, notificationComponent, filters);
         return data;
     } catch (e) {
         throw e;

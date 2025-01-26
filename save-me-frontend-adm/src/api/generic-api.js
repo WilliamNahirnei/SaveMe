@@ -19,16 +19,17 @@ api.interceptors.request.use((config) => {
 api.interceptors.response.use(
   (response) => response,
   (error) => {
-    console.log(error.response);
     return Promise.reject(error);
   }
 );
 
 // Função para fazer uma requisição GET
-const get = async (path, params = {}, notificator) => {
+const get = async (path, params = {}, notificator, filters) => {
   try {
     // Garante que `path` seja apenas o caminho relativo
-    console.log("Full URL:", `${process.env.NEXT_PUBLIC_API_URL}${path}`);    return await api.get(path, { params });
+    const formatedFilters = formatFilters(filters)
+
+    return await api.get(path, {params: {...params, ...formatedFilters}} );
   } catch (e) {
     handleError(e, notificator);
     return { data: {} };
@@ -122,6 +123,17 @@ function mountValidationsMessages(validationError) {
     });
   });
   return messageList;
+}
+
+function formatFilters(filters) {
+  const formattedFilters = {};
+
+  filters.forEach((filter) => {
+      const capitalizedField = `filter${filter.field.charAt(0).toUpperCase()}${filter.field.slice(1)}`;
+      const { field, ...rest } = filter; // Remove o campo 'field' do objeto original
+      formattedFilters[capitalizedField] = JSON.stringify(rest);
+  });
+  return formattedFilters;
 }
 
 export { api, get, post, put, destroy };
