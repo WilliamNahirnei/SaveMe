@@ -8,6 +8,7 @@ import './globals.css';
 export default function RootLayout({ children }) {
   const menuItems = [
     { text: "Home", href: "/" },
+    { text: "Pedidos Socorro", href: "/HelpPoints" },
     { text: "Usuários", href: "/Users" },
     { text: "Configurações", href: "/configuracoes" }
   ];

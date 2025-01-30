@@ -12,7 +12,9 @@ const HelpPointRequest = require('./HelpPointRequest')
 exports.index = async function (request) {
     const requestParams = RequestUtils.getRequestParams(request)
     const filters = RequestUtils.extractQueryFilters(request)
-    return Formater.index(await HelpPointRepository.index(filters))
+    const paginationData = RequestUtils.getPaginationParams(request)
+
+    return Formater.index(await HelpPointRepository.index(filters, paginationData))
 }
 
 exports.show = async function (request, response) {

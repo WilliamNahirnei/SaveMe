@@ -27,7 +27,7 @@ api.interceptors.response.use(
 const get = async (path, params = {}, notificator, filters) => {
   try {
     // Garante que `path` seja apenas o caminho relativo
-    const formatedFilters = formatFilters(filters)
+    const formatedFilters = formatFilters(filters ?? [])
 
     return await api.get(path, {params: {...params, ...formatedFilters}} );
   } catch (e) {

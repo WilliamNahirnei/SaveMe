@@ -1,16 +1,25 @@
 const HelpPoint = require('./HelpPoint')
-const { applyFilters } = require('../DatabaseSuport/WhereSuport');
+const { applyFilters, mountObjectDefaultToSelect} = require('../DatabaseSuport/WhereSuport');
 const FILTER_FIELDS = require('./HelpPointFilters');
 
-exports.index = async function (filters) {
-    const whereClause = applyFilters(filters, FILTER_FIELDS);
-    if (Object.keys(whereClause).length === 0) {
-        return await HelpPoint.findAll();
-    }
+exports.index = async function (filters, paginationData) {
+    objectToSelect = mountObjectDefaultToSelect(
+        {
+            filters,
+            filterFields: FILTER_FIELDS
+        },
+        paginationData
+    )
 
-    return await HelpPoint.findAll({
-        where: whereClause
-    });
+    const helpPoints = await HelpPoint.findAndCountAll(objectToSelect);
+    const totalPages = Math.ceil(helpPoints.count / paginationData.pageSize);
+
+    return {
+        total: helpPoints.count,
+        page: paginationData.page,
+        totalPages,
+        helpPoints: helpPoints.rows
+    };
 };
 
 exports.show = async function (idHelpPoint) {

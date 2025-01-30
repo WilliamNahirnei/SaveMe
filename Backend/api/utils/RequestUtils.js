@@ -48,9 +48,10 @@ exports.getPaginationParams = function(request) {
 
 function mountPaginationParamsObject(requestData) {
     const pageSize = requestData.pageSize ? parseInt(requestData.pageSize): 10
+    const page = requestData.page ? requestData.page : 1
     return {
-        offset: (requestData.page - 1) * pageSize,
-        page: requestData.page,
+        offset: (page - 1) * pageSize,
+        page: page,
         pageSize: pageSize,
     }
 }
